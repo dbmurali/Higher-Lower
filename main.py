@@ -4,55 +4,41 @@ from game_data import data
 
 print(logo)
 print("GUESS WHO HAS MORE INSTAGRAM FOLLOWERS")
-# chose two random values from list
-left=random.choice(data)
-right=random.choice(data)
+
+B=random.choice(data)
+A = random.choice(data)
+score=0
+to_run=True
+
+while to_run:
+
+        def print_details(datas):
+           return  {datas['name'],datas['description'],datas['country']}
+        if A==B:
+            B=random.choice(data)
+
+        print(print_details(A))
+        print("------VS-------")
+        print(print_details(B))
+
+        a_followers=A['follower_count']
+        b_followers=B['follower_count']
+
+        user_choice=input("choose \"A\" or \"B\":  ").upper()
+
+        if a_followers>b_followers and user_choice=="A":
+            score += 1
+            print(F"correct  your score: {score}")
+            B = random.choice(data)
 
 
-print(f"A: {left['name']},{left['description']},{left['country']}")
-print(f"B: {right['name']},{right['description']},{right['country']}")
+        elif b_followers>a_followers and user_choice=="B":
+            score += 1
+            print(F"correct  your score: {score}")
+            A=B
+            B=random.choice(data)
 
-SCORE=0
-is_user_correct=True
-while is_user_correct:
-        user_input=input("Enter A or B: ").upper()
+        else:
 
-
-        if user_input=="A":
-             if left['follower_count'] > right['follower_count']:
-               print(f"A: {left['name']},{left['description']},{left['country']},{left['follower_count']}")
-               print(f"B: {right['name']},{right['description']},{right['country']},{right['follower_count']}")
-               right = random.choice(data)
-               print("CORRECT ANSWER")
-               print("\n"*4)
-               print(f"A: {left['name']},{left['description']},{left['country']}")
-               print(f"B: {right['name']},{right['description']},{right['country']}")
-               SCORE+=1
-               print(f"YOUR SCORE= {SCORE}")
-             else:
-              print("WRONG ANSWER")
-              print("game over")
-              print(left)
-              print(right)
-              print(f"YOUR SCORE= {SCORE}")
-              is_user_correct=False
-
-        if user_input=="B":
-            if left['follower_count']<right['follower_count']:
-                print(f"A: {left['name']},{left['description']},{left['country']},{left['follower_count']}")
-                print(f"B: {right['name']},{right['description']},{right['country']},{right['follower_count']}")
-                left=random.choice(data)
-                print("CORRECT ANSWER")
-                print("\n" * 4)
-                print(f"A: {left['name']},{left['description']},{left['country']}")
-                print(f"B: {right['name']},{right['description']},{right['country']}")
-                SCORE += 1
-                print(f"YOUR SCORE= {SCORE}")
-            else:
-                print("WRONG ANSWER")
-                print("game over")
-                print(left)
-                print(right)
-                print(f"YOUR SCORE= {SCORE}")
-                is_user_correct = False
-
+            print(f"wrong  final score: {score}")
+            to_run=False
